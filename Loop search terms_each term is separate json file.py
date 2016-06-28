@@ -3,8 +3,8 @@ import json
 
 #Format &q='exact+phrase'
 
-api_url = 'http://api.indeed.com/ads/apisearch?publisher=8710117352111766&v=2&limit=100000&format=json'
-
+api_url = 'http://api.indeed.com/ads/apisearch?publisher=###########&v=2&limit=100000&format=json'
+#Replace ########### with your publisher ID 
 
 
 SearchTerms = set(['Management+Consulting', 'Management+Consultant', 'Management+Consult' ])
