@@ -1,4 +1,16 @@
-# IndeedJobSearchScraper
+# LinkedIn
+
+Just looping through the API. 
+
+Instructions:
+1. Copy into chrome snippets
+2. Add your CSRF token
+    (Can be found in any request sent to Linkedin, or in devtools -> application -> cookies. Look for the value next to JSESSIONID. The format is like this: "ajax:XXXXXXXXXXXXXX")
+    https://i.imgur.com/VKS5SOf.png
+3. Modify the parameters as you please
+
+
+# Indeed
 
 **Warning: I haven't tested this since 2016!**
 
