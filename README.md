@@ -10,6 +10,12 @@ Instructions:
 3. Modify the parameters as you please
 
 
+Some Notes:
+
+Even if Linkedin says there are 12,987 results, it will only paginate up to 1000 results, requests with a higher start number will fail. Therefore you need to restrict the search so that you have less than 1000 results each time. My first approach was to do a separate search for each city. This works, but sometimes it doesn't return the same number of results as the frontend. For one of the cities my script only returned like 40 results whereas the LinkedIn frontend showed 710. 
+So to get more results I'll consider using zipcodes and/or geoIds. We will probably need to make more requests to obtain the geoIds.  
+
+
 # Indeed
 
 **Warning: I haven't tested this since 2016!**
