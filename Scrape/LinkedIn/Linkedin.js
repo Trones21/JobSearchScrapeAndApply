@@ -83,6 +83,7 @@ async function parseData(data) {
 
 }
 
+
 async function callAPI(startNum, count, location) {
     try {
         let res = await fetch(`https://www.linkedin.com/voyager/api/search/hits?decorationId=com.linkedin.voyager.deco.jserp.WebJobSearchHitWithSalary-17
