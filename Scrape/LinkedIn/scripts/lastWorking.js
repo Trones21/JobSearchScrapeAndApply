@@ -26,8 +26,8 @@ let headers = {
 
 /* Location string must be URIencoded - {City, State, Country} with a slight modification - commas should be %2C*/
 // ex Yountville%2C%20California%2C%20United%20States
-let locations = ["Alameda", "Albany", "American Canyon", "Antioch", "Atherton", "Belmont", "Belvedere", "Benicia", "Berkeley", "Brentwood", "Brisbane", "Burlingame", "Calistoga", "Campbell", "Clayton", "Cloverdale", "Colma", "Concord", "Corte Madera", "Cotati", "Cupertino", "Daly City", "Danville", "Dixon", "Dublin", "East Palo Alto", "El Cerrito", "Emeryville", "Fairfax", "Fairfield", "Foster City", "Fremont", "Gilroy", "Half Moon Bay", "Hayward", "Healdsburg", "Hercules", "Hillsborough", "Lafayette", "Larkspur", "Livermore", "Los Altos", "Los Altos Hills", "Los Gatos", "Martinez", "Menlo Park", "Mill Valley", "Millbrae", "Milpitas", "Monte Sereno", "Moraga", "Morgan Hill", "Mountain View", "Napa", "Newark", "Novato", "Oakland", "Oakley", "Orinda", "Pacifica", "Palo Alto", "Petaluma", "Piedmont", "Pinole", "Pittsburg", "Pleasant Hill", "Pleasanton", "Portola Valley", "Redwood City", "Richmond", "Rio Vista", "Rohnert Park", "Ross", "St. Helena", "San Anselmo", "San Bruno", "San Carlos", 
-"San Francisco", "San Jose", "San Leandro", "San Mateo", "San Pablo", "San Rafael", "San Ramon", "Santa Clara", "Santa Rosa", "Saratoga", "Sausalito", "Sebastopol", "Sonoma", "South San Francisco", "Suisun City", "Sunnyvale", "Tiburon", "Union City", "Vacaville", "Vallejo", "Walnut Creek", "Windsor", "Woodside", "Yountville"].map(i=>encodeURI(i + ', California, United States').replace(/,/g, '%2C'));
+let locations = ["Alameda", "Albany", "American Canyon", "Antioch", "Atherton", "Belmont", "Belvedere", "Benicia", "Berkeley", "Brentwood", "Brisbane", "Burlingame", "Calistoga", "Campbell", "Clayton", "Cloverdale", "Colma", "Concord", "Corte Madera", "Cotati", "Cupertino", "Daly City", "Danville", "Dixon", "Dublin", "East Palo Alto", "El Cerrito", "Emeryville", "Fairfax", "Fairfield", "Foster City", "Fremont", "Gilroy", "Half Moon Bay", "Hayward", "Healdsburg", "Hercules", "Hillsborough", "Lafayette", "Larkspur", "Livermore", "Los Altos", "Los Altos Hills", "Los Gatos", "Martinez", "Menlo Park", "Mill Valley", "Millbrae", "Milpitas", "Monte Sereno", "Moraga", "Morgan Hill", "Mountain View", "Napa", "Newark", "Novato", "Oakland", "Oakley", "Orinda", "Pacifica", "Palo Alto", "Petaluma", "Piedmont", "Pinole", "Pittsburg", "Pleasant Hill", "Pleasanton", "Portola Valley", "Redwood City", "Richmond", "Rio Vista", "Rohnert Park", "Ross", "St. Helena", "San Anselmo", "San Bruno", "San Carlos",
+    "San Francisco", "San Jose", "San Leandro", "San Mateo", "San Pablo", "San Rafael", "San Ramon", "Santa Clara", "Santa Rosa", "Saratoga", "Sausalito", "Sebastopol", "Sonoma", "South San Francisco", "Suisun City", "Sunnyvale", "Tiburon", "Union City", "Vacaville", "Vallejo", "Walnut Creek", "Windsor", "Woodside", "Yountville"].map(i => encodeURI(i + ', California, United States').replace(/,/g, '%2C'));
 
 async function main() {
     let locationCounts = []
@@ -39,9 +39,9 @@ async function main() {
 
         let res = await callAPI(0, 50, location);
         links.push(...await parseData(res));
-        locationCounts.push({loc:location, count:res.data.paging.total})
-        console.log({loc:res.loc, count:res.data.paging.total})
-        
+        locationCounts.push({ loc: location, count: res.data.paging.total })
+        console.log({ loc: res.loc, count: res.data.paging.total })
+
         if (res.data.paging.total > 50) {
             let max = (res.data.paging.total >= 1000) ? 1000 : res.data.paging.total;
             for (let start = 50; start < max; start += 50) {
@@ -52,8 +52,8 @@ async function main() {
     }
 
     /*Still parsing but let's do it all at once*/
-    links = links.filter(i=>i !== false)
-    links.forEach(i=>{
+    links = links.filter(i => i !== false)
+    links.forEach(i => {
         i.domain = i.link.split('/')[2];
     }
     )
@@ -63,13 +63,13 @@ async function main() {
 }
 
 async function sleep(ms) {
-    return new Promise(resolve=>setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 //geoUrn-%3Eurn%3Ali%3Afs_geo%3A90000084,
 
 async function parseData(data) {
     if (data) {
-        let d = await data.included.filter(i=>i.applyMethod).filter(i=>i.applyMethod["$type"] === "com.linkedin.voyager.jobs.OffsiteApply").map(i=>{
+        let d = await data.included.filter(i => i.applyMethod).filter(i => i.applyMethod["$type"] === "com.linkedin.voyager.jobs.OffsiteApply").map(i => {
             return {
                 id: i.dashEntityUrn,
                 loc: i.formattedLocation,
@@ -102,9 +102,9 @@ resultType-%3EJOBS)
     }
 }
 
-(async()=>{
+(async () => {
     main();
- console.log(locations)
+    console.log(locations)
     //     let test = await callAPI(0, 10, locations[20], true)
     //     console.log(test.data.paging.total);
 }
